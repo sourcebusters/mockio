@@ -1,0 +1,14 @@
+[package]
+name = "mockio"
+version = "0.1.0"
+authors = ["sourcebusters"]
+edition = "2018"
+
+[dependencies]
+futures = "*"
+hyper = "*"
+lazy_static = "*"
+serde = "*"
+serde_derive = "*"
+log = "*"
+pretty_env_logger = "*"
