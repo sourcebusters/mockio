@@ -1,3 +1,5 @@
+extern crate pretty_env_logger;
+
 fn main() {
-    println!("Hello, world!");
+    pretty_env_logger::init();
 }
