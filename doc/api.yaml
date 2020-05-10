@@ -1,0 +1,113 @@
+openapi: 3.0.2
+
+info:
+  title: MockIO
+  version: 1.0.0
+  contact:
+    name: Source Busters
+  description: |
+    Configurable mock server for mocking HTTP requests.
+
+
+paths:
+  /config:
+
+    post:
+      summary: Create a named configurable mock instance
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MockParams"
+
+      responses:
+        "204":
+          description: Mock instance was created successfully
+
+        "404":
+          description: Mock parameters validation failed
+
+
+
+  /config/{mockId}:
+
+      delete:
+        summary: Resets a named configurable mock instance
+      responses:
+        "204":
+          description: the mock was reseted successfully
+
+
+      post:
+        summary: Creates a request matcher configuration
+
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MatcherParams"
+
+  /{mockType}/{mockId}:
+    summary: Mock instance root path. A dynamic endpoint which requires a mock configuration to be created first
+
+
+components:
+  parameters:
+    mockId:
+      description: >
+        The unique mock configuration identifier.
+      name: mockId
+      in: path
+      required: true
+      schema:
+        $ref: "#/components/schemas/mockId"
+
+    mockType:
+      description: >
+        The mock configuration type.
+      name: mockId
+      in: path
+      required: true
+      schema:
+        $ref: "#/components/schemas/mockType"
+
+  schemas:
+    mockId:
+      description: >
+        The unique mock identifier.
+      type: string
+      readOnly: true
+      pattern: "^[a-z0-9]{26}"
+      example: "zzyn9gy9r8xdy5zkru4y54syk6"
+
+    mockType:
+      description: >
+        The mock configuration type.
+      type: string
+      readOnly: true
+      enum: [http]
+
+
+    MockParams:
+      description: >
+        The mock configuration parameters.
+      type: object
+      properties:
+        mockId:
+          $ref: "#/components/schemas/mockId"
+        mockType:
+          $ref: "#/components/schemas/mockType"
+      additionalProperties: false
+      required:
+        - mockId
+
+    MatcherParams:
+      description: >
+        The request matcher configuration parameters.
+      type: object
+      properties:
+      additionalProperties: false
+      required:
