@@ -10,7 +10,7 @@ info:
 
 
 paths:
-  /config:
+  /config/{mockType}:
 
     post:
       summary: Create a named configurable mock instance
@@ -26,12 +26,12 @@ paths:
         "204":
           description: Mock instance was created successfully
 
-        "404":
+        "400":
           description: Mock parameters validation failed
 
 
 
-  /config/{mockId}:
+  /config/{mockType}/{mockId}:
 
       delete:
         summary: Resets a named configurable mock instance
@@ -98,8 +98,6 @@ components:
       properties:
         mockId:
           $ref: "#/components/schemas/mockId"
-        mockType:
-          $ref: "#/components/schemas/mockType"
       additionalProperties: false
       required:
         - mockId
@@ -109,5 +107,17 @@ components:
         The request matcher configuration parameters.
       type: object
       properties:
+        method:
+          $ref: "#/components/schemas/method"
+        path:
+          $ref: "#/components/schemas/path"
+        query:
+          $ref: "#/components/schemas/query"
+        headers:
+          $ref: "#/components/schemas/headers"
+        body:
+          $ref: "#/components/schemas/body"
       additionalProperties: false
       required:
+        - method
+        - path
