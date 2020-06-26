@@ -23,7 +23,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name; lint
+    - name: lint
       run: make lint
     - name: Build
       run: make build
