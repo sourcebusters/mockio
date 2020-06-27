@@ -1,4 +1,4 @@
-FROM rust:latest as mockio-build
+FROM rust:latest-alpine as mockio-build
 
 RUN apt-get update
 
