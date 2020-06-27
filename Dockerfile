@@ -2,8 +2,6 @@ FROM rust:latest as mockio-build
 
 RUN apt-get update
 
-RUN cargo install cargo-build-deps
-
 RUN apt-get install musl-tools -y
 
 RUN rustup target add x86_64-unknown-linux-musl
@@ -14,7 +12,7 @@ WORKDIR /tmp/mockio
 
 COPY Cargo.toml Cargo.lock ./
 
-RUN RUSTFLAGS=-Clinker=musl-gcc cargo build-deps --release --target=x86_64-unknown-linux-musl
+RUN RUSTFLAGS=-Clinker=musl-gcc cargo build--release --target=x86_64-unknown-linux-musl
 
 COPY src /tmp/mockio/src
 
