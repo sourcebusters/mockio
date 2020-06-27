@@ -6,15 +6,15 @@ RUN apt-get install musl-tools -y
 
 RUN rustup target add x86_64-unknown-linux-musl
 
-RUN cd /tmp && USER=root cargo new --bin mockio
+WORKDIR /usr/src/mockio
 
-WORKDIR /tmp/mockio
+RUN cargo new --bin mockio
 
 COPY Cargo.toml Cargo.lock ./
 
 RUN RUSTFLAGS=-Clinker=musl-gcc cargo build --release --target=x86_64-unknown-linux-musl
 
-COPY src /tmp/mockio/src
+COPY . .
 
 RUN RUSTFLAGS=-Clinker=musl-gcc cargo build --release --target=x86_64-unknown-linux-musl
 
@@ -30,7 +30,7 @@ RUN adduser -D -s /bin/sh-u 1000 -G mockio mockio
 
 WORKDIR /home/mockio/bin
 
-COPY --from=mockio-build /tmp/mockio/target/release/x86_64-unknown-linux-musl/mockio mockio
+COPY --from=mockio-build /usr/src/mocki/target/release/x86_64-unknown-linux-musl/mockio mockio
 
 RUN chown mockio:mockio mockio
 
