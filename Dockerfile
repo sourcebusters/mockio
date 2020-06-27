@@ -12,7 +12,7 @@ WORKDIR /tmp/mockio
 
 COPY Cargo.toml Cargo.lock ./
 
-RUN RUSTFLAGS=-Clinker=musl-gcc cargo build--release --target=x86_64-unknown-linux-musl
+RUN RUSTFLAGS=-Clinker=musl-gcc cargo build --release --target=x86_64-unknown-linux-musl
 
 COPY src /tmp/mockio/src
 
