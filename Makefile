@@ -17,6 +17,6 @@ test:
 	cargo test
 
 dist:
-	cargo build --bin
+	cargo build --bin mockio
 
 docs:
