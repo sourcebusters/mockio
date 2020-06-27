@@ -30,7 +30,7 @@ RUN adduser -D -s /bin/sh-u 1000 -G mockio mockio
 
 WORKDIR /home/mockio/bin
 
-COPY --from=mockio-build /tmp/mockio/src/target/x86_64-unknown-linux-musl/release/ .
+COPY --from=mockio-build /tmp/mockio/src/target/release/x86_64-unknown-linux-musl .
 
 RUN chown mockio:mockio mockio
 
