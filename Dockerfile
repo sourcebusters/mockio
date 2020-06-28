@@ -6,9 +6,11 @@ RUN apt-get install musl-tools -y
 
 RUN rustup target add x86_64-unknown-linux-musl
 
-WORKDIR /usr/src/mockio
+RUN mkdir /usr/src
 
-RUN cargo new --bin mockio
+RUN cd /usr/src && USER=root cargo new --bin mockio
+
+WORKDIR /usr/src/mockio
 
 COPY Cargo.toml Cargo.lock ./
 
