@@ -18,20 +18,23 @@ env:
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
 
     steps:
-    - uses: actions/checkout@v2
-    - name: lint
-      run: make lint
-    - name: Run tests
-      run: make test
-    - name: Build
-      run: make dist
+      - uses: actions/checkout@v2
+      - name: lint
+        run: make lint
+      - name: Run tests
+        run: make test
+      - name: Build
+        run: make dist
+
   # Run tests.
   # See also https://docs.docker.com/docker-hub/builds/automated-testing/
-  test:
+  docker:
     runs-on: ubuntu-latest
 
     steps:
@@ -50,7 +53,7 @@ jobs:
   # See also https://docs.docker.com/docker-hub/builds/
   push:
     # Ensure test job passes before pushing image.
-    needs: test
+    needs: docker
 
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
