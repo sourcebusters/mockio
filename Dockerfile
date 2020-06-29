@@ -1,4 +1,10 @@
-FROM rust:alpine as mockio-build
+FROM rust:latest as mockio-build
+
+RUN apt-get update
+
+RUN apt-get install musl-tools -y
+
+RUN rustup target add x86_64-unknown-linux-musl
 
 RUN USER=root cargo new --bin mockio
 
