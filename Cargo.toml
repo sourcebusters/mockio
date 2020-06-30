@@ -4,6 +4,9 @@ version = "0.1.0"
 authors = ["sourcebusters"]
 edition = "2018"
 
+[dev-dependencies]
+testcontainers = "*"
+
 [dependencies]
 futures = "*"
 hyper = "*"
