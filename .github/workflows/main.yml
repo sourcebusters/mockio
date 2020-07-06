@@ -34,6 +34,7 @@ jobs:
   # See also https://docs.docker.com/docker-hub/builds/automated-testing/
   docker:
     runs-on: ubuntu-latest
+    if: false
 
     steps:
       - uses: actions/checkout@v2
