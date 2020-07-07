@@ -17,7 +17,19 @@ env:
   IMAGE_NAME: mockio
 
 jobs:
+  static:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install tools
+        run: make deps
+      - name: Check formatting
+        run: make fmt
+      - name: Lint
+        run: make lint
+
   build:
+    needs: static
     runs-on: ${{matrix.os}}
     strategy:
       matrix:
@@ -25,8 +37,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: lint
-        run: make lint
       - name: Run tests
         run: make test
       - name: Build
@@ -36,6 +46,7 @@ jobs:
   # See also https://docs.docker.com/docker-hub/builds/automated-testing/
   docker:
     runs-on: ubuntu-latest
+    if: false
 
     steps:
       - uses: actions/checkout@v2

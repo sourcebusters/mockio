@@ -1,17 +1,7 @@
-[package]
-name = "mockio"
-version = "0.1.0"
-authors = ["sourcebusters"]
-edition = "2018"
+[workspace]
 
-[dev-dependencies]
-testcontainers = "*"
-
-[dependencies]
-futures = "*"
-hyper = "*"
-lazy_static = "*"
-serde = "*"
-serde_derive = "*"
-log = "*"
-pretty_env_logger = "*"
+members = [
+  "mockio",
+  "mockio-server",
+  "mockio-client"
+]
