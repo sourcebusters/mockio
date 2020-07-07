@@ -12,7 +12,7 @@ deps:
 	rustup component add clippy
 
 fmt:
-	cargo fmt --check
+	cargo fmt -- --check
 
 lint:
 	cargo clippy

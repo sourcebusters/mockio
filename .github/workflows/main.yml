@@ -21,8 +21,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Install tools
+        run: make deps
+      - name: Check formatting
+        run: make fmt
       - name: Lint
-        run: make deps && make fmt && make lint
+        run: make lint
 
   build:
     needs: static
