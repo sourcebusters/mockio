@@ -8,9 +8,13 @@ clean:
 deps:
 	rustup default stable
 	rustup update
+	rustup component add rustfmt
 	rustup component add clippy
 
-lint: deps
+fmt:
+	cargo fmt --check
+
+lint:
 	cargo clippy
 
 test:
