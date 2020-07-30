@@ -1,5 +1,5 @@
 [package]
-name = "mockio-client"
+name = "mockio-rs"
 version = "0.1.0"
 authors = ["sourcebusters"]
 edition = "2018"

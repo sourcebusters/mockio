@@ -8,4 +8,6 @@ edition = "2018"
 
 [dependencies]
 
+clap = "*"
+pretty_env_logger = "*"
 mockio-server = { path = "../mockio-server" }
